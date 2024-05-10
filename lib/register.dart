@@ -55,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       // Koşullar sağlanmadığında kullanıcıya uyarı gösterilir.
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen tüm alanları doğru şekilde doldurun ve gizlilik politikasını kabul edin.')),
+        const SnackBar(
+            content: Text(
+                'Lütfen tüm alanları doğru şekilde doldurun ve gizlilik politikasını kabul edin.')),
       );
     }
   }
@@ -65,8 +67,15 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Üye Ol'),
         backgroundColor: Colors.white,
+        title: const Text(
+          'Üye Ol',
+          style: TextStyle(
+            color: Color(0xFFE62063),
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

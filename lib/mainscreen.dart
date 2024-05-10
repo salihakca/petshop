@@ -1,37 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:petshop/searchscreen.dart';
+import 'package:petshop/profilescreen.dart';
+import 'package:petshop/campaingscreen.dart'; 
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this); // TabController'ın length'i 4 olarak değiştirildi.
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PetShop'),
-        backgroundColor: Colors.white,
-        foregroundColor: Color(0xFFE62063),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          Center(child: Text('Ana Ekran')),
+          SearchScreen(),
+          ProfileScreen(),
+          CampaignScreen(),
+        ],
       ),
-      body: Center(
+      bottomNavigationBar: Material(
+        color: Colors.white,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Hoş Geldiniz!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Butona tıklanınca yapılacak işlemler buraya gelir.
-              },
-              style: ElevatedButton.styleFrom(
-
-                minimumSize: const Size(150, 50),
-              ),
-              child: const Text(
-                'Giriş Yap',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
+            TabBar(
+              controller: _tabController,
+              tabs: const [
+                Tab(icon: Icon(Icons.home), text: 'Home'),
+                Tab(icon: Icon(Icons.search), text: 'Search'),
+                Tab(icon: Icon(Icons.person), text: 'Profile'),
+                Tab(icon: Icon(Icons.local_offer), text: 'Campaign'),
+              ],
             ),
           ],
         ),

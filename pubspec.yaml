@@ -1,9 +1,9 @@
 name: petshop
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -19,3 +19,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/photo/dog.png
+    - assets/photo/bird.jpeg
+    - assets/photo/cat.jpeg
+    - assets/photo/fish.jpeg
+    - assets/photo/papagan.jpeg
+    - assets/photo/tavsan.jpeg

@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                       Color(0xFFE62063),
                     ),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(400, 60),
+                      const Size(300, 60),
                     ),
                   ),
                   child: const Text(
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       BorderSide(color: Color(0xFFE62063)),
                     ),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(400, 60),
+                      const Size(300, 60),
                     ),
                   ),
                   child: const Text(

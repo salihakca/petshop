@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.black,
+                  color: const Color.fromARGB(255, 197, 93, 93),
                 ),
                 child: Image.asset(
                   'assets/photo/dog.png',

@@ -14,6 +14,7 @@ class SearchScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false, // Geri butonunu kaldırır
       ),
+      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(

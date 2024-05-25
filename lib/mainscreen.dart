@@ -11,7 +11,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   final List<Map<String, dynamic>> categories = [
@@ -51,7 +52,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
               ),
               automaticallyImplyLeading: false, // Geri butonunu kaldırır
             ),
-            backgroundColor: const Color.fromARGB(255, 18, 18, 19),
+            backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
             body: ListView.builder(
               itemCount: (categories.length / 2).ceil(),
               itemBuilder: (BuildContext context, int index) {
@@ -83,6 +84,9 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         color: Colors.white,
         child: TabBar(
           controller: _tabController,
+          indicatorColor: Color(0xFFE62063), // Tab indicator rengini ayarladık
+          labelColor: Color(0xFFE62063), // Seçili tab ikon ve metin rengini ayarladık
+          unselectedLabelColor: Colors.grey, // Seçilmemiş tab ikon ve metin rengini ayarladık
           tabs: const [
             Tab(icon: Icon(Icons.home), text: 'Home'),
             Tab(icon: Icon(Icons.search), text: 'Search'),

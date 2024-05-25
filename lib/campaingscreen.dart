@@ -14,6 +14,7 @@ class CampaignScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false, // Geri butonunu kaldırır
       ),
+      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -22,7 +23,7 @@ class CampaignScreen extends StatelessWidget {
             SizedBox(height: 4), // AppBar ile arasına boşluk
             _buildCampaignContainer(
               context,
-              imageAsset: 'assets/photo/funny_dog.png',
+              imageAsset: 'assets/photo/dog_2.jpeg',
               text: 'İlk Siparişinize Özel 50TL Hediye',
             ),
             SizedBox(height: 8), // Aralarındaki boşluk
@@ -52,7 +53,7 @@ class CampaignScreen extends StatelessWidget {
             imageAsset,
             fit: BoxFit.cover, // İmage'ın containerı dolduracak şekilde sığması
             height: MediaQuery.of(context).size.height * 0.24, // %25 yükseklik
-      width: MediaQuery.of(context).size.width * 0.3, // %90 genişlik
+            width: MediaQuery.of(context).size.width * 0.8, // %90 genişlik
           ),
           SizedBox(height: 4),
           Text(

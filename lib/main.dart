@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(

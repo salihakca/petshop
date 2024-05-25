@@ -20,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false, // Geri butonunu kaldırır
       ),
+      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
       body: Center(
         // Yatayda ve dikeyde ortalamak için Center widget'ını kullanabilirsiniz
         child: Column(

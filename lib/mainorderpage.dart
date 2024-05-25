@@ -67,12 +67,12 @@ class MainOrderPage extends StatelessWidget {
     final List<Map<String, dynamic>> itemList = categoryItems[categoryName] ?? [];
 
     return Scaffold(
-      backgroundColor: Colors.white, // Dış rengi beyaz yaptık
+      backgroundColor: Color(0xFFD3D3D3), // Dış rengi #D3D3D3 yaptık
       appBar: AppBar(
-        title: Text('$categoryName'),
-        backgroundColor: Colors.white, // AppBar rengini de beyaz yaptık
+        title: Text('$categoryName', style: TextStyle(color: Colors.white)), // CategoryName rengini white yaptık
+        backgroundColor: Color(0xFFE62063), // AppBar rengini #E62063 yaptık
         iconTheme: IconThemeData(color: Colors.black), // AppBar'daki ikon rengini siyah yaptık
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold), // AppBar'daki başlık rengini siyah yaptık
+        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold), // AppBar'daki başlık rengini white yaptık
       ),
       body: GridView.builder(
         padding: EdgeInsets.all(8.0),
@@ -114,7 +114,7 @@ class MainOrderPage extends StatelessWidget {
   Widget buildGridItem(Map<String, dynamic> item) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white, // Item'ların arka plan rengini beyaz yaptık
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
@@ -126,29 +126,27 @@ class MainOrderPage extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)), // Resim köşelerini yuvarladık
-            child: Image.asset(
-              item['image'],
-              width: double.infinity,
-              height: 120,
-              fit: BoxFit.cover,
+          Image.asset(
+            item['image'],
+            width: 140,
+            height: 170,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            item['name'],
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              item['name'],
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              'Fiyat: ${item['price']}',
-              style: TextStyle(fontSize: 14, color: Color(0xFFE62063)), // Fiyat rengini #E62063 yaptık
+          const SizedBox(height: 5),
+          Text(
+            'Fiyat: ${item['price']}',
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFFE62063), // Fiyat rengini #E62063 yaptık
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petshop/searchscreen.dart';
 import 'package:petshop/profilescreen.dart';
 import 'package:petshop/campaingscreen.dart';
+import 'package:petshop/mainorderpage.dart'; // MainOrderPage'ı import etmeyi unutma
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -97,7 +98,12 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     return GestureDetector(
       onTap: () {
         // Kategoriye tıklandığında yapılacak işlemler
-        print('Tıklandı: ${category['name']}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainOrderPage(categoryName: category['name']),
+          ),
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 2 - 16,
@@ -122,7 +128,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-              ),              
+              ),
             ),
           ],
         ),

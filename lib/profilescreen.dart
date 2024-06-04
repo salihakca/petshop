@@ -128,17 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     _deleteCartItem(index);
                   },
                 ),
-                TextButton(
-                  onPressed: () {
-                    _deleteCartItem(index);
-                  },
-                  child: Text(
-                    'Sil',
-                    style: TextStyle(
-                      color: Color(0xFFE62063),
-                    ),
-                  ),
-                ),
+            
               ],
             ),
           ),

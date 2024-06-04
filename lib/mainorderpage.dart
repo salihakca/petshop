@@ -33,27 +33,27 @@ final Map<String, List<Map<String, dynamic>>> categoryItems = {
   'Köpek Maması': [
     {
       'name': 'Kurutulmuş Köpek Maması',
-      'image': 'assets/photo/dog.jpeg',
+      'image': 'assets/photo/dog.png',
       'price': '899 TL',
     },
     {
       'name': 'Islak Köpek Maması',
-      'image': 'assets/photo/dog.jpeg',
+      'image': 'assets/photo/dog.png',
       'price': '1099 TL',
     },
     {
       'name': 'Kuzu Etli Köpek Maması',
-      'image': 'assets/photo/dog.jpeg',
+      'image': 'assets/photo/dog.png',
       'price': '999 TL',
     },
     {
       'name': 'Balıklı Köpek Maması',
-      'image': 'assets/photo/dog.jpeg',
+      'image': 'assets/photo/dog.png',
       'price': '999 TL',
     },
     {
       'name': 'Tavuklu Köpek Maması',
-      'image': 'assets/photo/dog.jpeg',
+      'image': 'assets/photo/dog.png',
       'price': '999 TL',
     },
   ],

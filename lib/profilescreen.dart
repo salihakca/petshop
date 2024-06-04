@@ -31,6 +31,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  void _deleteCartItem(int index) async {
+    setState(() {
+      cartItems.removeAt(index);
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> cartItemsString = cartItems.map((item) => jsonEncode(item)).toList();
+    prefs.setStringList('cartItems', cartItemsString);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,14 +63,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: EdgeInsets.all(8.0),
           itemCount: cartItems.length,
           itemBuilder: (BuildContext context, int index) {
-            return buildListItem(cartItems[index]);
+            return buildListItem(cartItems[index], index);
           },
         ),
       ),
     );
   }
 
-  Widget buildListItem(Map<String, dynamic> item) {
+  Widget buildListItem(Map<String, dynamic> item, int index) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       padding: EdgeInsets.all(8.0),
@@ -76,30 +86,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.4,
       width: MediaQuery.of(context).size.width * 0.9,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
-          Image.asset(
-            item['image'],
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.15,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                item['image'],
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                item['name'],
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Fiyat: ${item['price']}',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFFE62063),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 5),
-          Text(
-            item['name'],
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            'Fiyat: ${item['price']}',
-            style: TextStyle(
-              fontSize: 14,
-              color: Color(0xFFE62063),
+          Positioned(
+            bottom: 8.0,
+            right: 8.0,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.delete, color: Color(0xFFE62063)),
+                  onPressed: () {
+                    _deleteCartItem(index);
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    _deleteCartItem(index);
+                  },
+                  child: Text(
+                    'Sil',
+                    style: TextStyle(
+                      color: Color(0xFFE62063),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

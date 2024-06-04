@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isNumberValid = false;
   bool isAgreementChecked = false;
 
-  void _validateInputs() async {
+  void _validateInputs() {
     setState(() {
       isNameValid = nameController.text.isNotEmpty;
       isSurnameValid = surnameController.text.isNotEmpty;
@@ -38,19 +38,20 @@ class _RegisterPageState extends State<RegisterPage> {
         isPasswordValid &&
         isNumberValid &&
         isAgreementChecked) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('email', emailController.text);
-      await prefs.setString('password', passwordController.text);
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('email', emailController.text);
+        prefs.setString('password', passwordController.text);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginPage()), // Changed to LoginPage
-      );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()), // Changed to LoginPage
+        );
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text(
-                'Lütfen tüm alanları doğru şekilde doldurun ve gizlilik politikasını kabul edin.')),
+          content: Text('Lütfen tüm alanları doğru şekilde doldurun ve gizlilik politikasını kabul edin.'),
+        ),
       );
     }
   }
@@ -70,81 +71,88 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                hintText: 'Ad',
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: surnameController,
-              decoration: const InputDecoration(
-                hintText: 'Soyad',
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: 'E-posta',
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Şifre (En az 8 karakter)',
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: numberController,
-              decoration: const InputDecoration(
-                hintText: 'Numara',
-              ),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Checkbox(
-                  value: isAgreementChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      isAgreementChecked = value!;
-                    });
-                  },
-                ),
-                const Text(
-                  'Gizlilik Politikalarını Kabul Ediyorum',
-                  style: TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _validateInputs,
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color(0xFFE62063),
-                ),
-                minimumSize: MaterialStateProperty.all<Size>(
-                  const Size(300, 60),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: 'Ad',
                 ),
               ),
-              child: const Text(
-                'Kayıt Ol',
-                style: TextStyle(color: Colors.white),
+              const SizedBox(height: 12),
+              TextField(
+                controller: surnameController,
+                decoration: const InputDecoration(
+                  hintText: 'Soyad',
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: 'E-posta',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Şifre (En az 8 karakter)',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: numberController,
+                decoration: const InputDecoration(
+                  hintText: 'Numara',
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Checkbox(
+                    value: isAgreementChecked,
+                    onChanged: (value) {
+                      setState(() {
+                        isAgreementChecked = value!;
+                      });
+                    },
+                  ),
+                  const Text(
+                    'Gizlilik Politikalarını Kabul Ediyorum',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: _validateInputs,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xFFE62063),
+                      ),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                        const Size(300, 60),
+                      ),
+                    ),
+                    child: const Text(
+                      'Kayıt Ol',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

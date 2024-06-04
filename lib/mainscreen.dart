@@ -16,11 +16,10 @@ class _MainScreenState extends State<MainScreen>
   late TabController _tabController;
 
   final List<Map<String, dynamic>> categories = [
-    {'image': 'assets/photo/cat.jpeg', 'name': 'Kedi Maması'},
-    {'image': 'assets/photo/dog.png', 'name': 'Köpek Maması'},
-    {'image': 'assets/photo/bird.jpeg', 'name': 'Kuş Yemi'},
+    {'image': 'assets/photo/cat5.png', 'name': 'Kedi Maması'},
+    {'image': 'assets/photo/dog5.png', 'name': 'Köpek Maması'},
     {'image': 'assets/photo/fish.jpeg', 'name': 'Balık Yemi'},
-    {'image': 'assets/photo/papagan.jpeg', 'name': 'Papagan Yemi'},
+    {'image': 'assets/photo/papagan1.png', 'name': 'Papagan Yemi'},
     {'image': 'assets/photo/tavsan.jpeg', 'name': 'Tavşan Yemi'},
   ];
 

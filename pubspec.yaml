@@ -28,5 +28,53 @@ flutter:
     - assets/photo/funny_cat.png
     - assets/photo/funny_dog.png
     - assets/photo/dog_2.jpeg
+    - assets/photo/cat5.png
+    - assets/photo/dog5.png
+    - assets/photo/parrot5.png
+    - assets/photo/cat_mama1.png
+    - assets/photo/cat_mama2.png
+    - assets/photo/cat_mama3.png
+    - assets/photo/cat_mama4.png
+    - assets/photo/cat_mama5.png
+    - assets/photo/cat_mama6.png
+    - assets/photo/cat_mama7.png
+    - assets/photo/cat_mama8.png
+    - assets/photo/cat_mama9.png
+    - assets/photo/cat_mama10.png
+    - assets/photo/kopek1.png
+    - assets/photo/kopek2.png
+    - assets/photo/kopek3.png
+    - assets/photo/kopek4.png
+    - assets/photo/kopek5.png
+    - assets/photo/kopek6.png
+    - assets/photo/papagan1.png
+    - assets/photo/papagan2.png
+    - assets/photo/papagan3.png
+    - assets/photo/papagan4.png
+    - assets/photo/papagan5.png
+    - assets/photo/papagan6.png
+    - assets/photo/balık1.png
+    - assets/photo/balık2.png
+    - assets/photo/balık3.png
+    - assets/photo/balık4.png
+    - assets/photo/balık5.png
+    - assets/photo/balık6.png
+    - assets/photo/tavsan1.png
+    - assets/photo/tavsan2.png
+    - assets/photo/tavsan3.png
+    - assets/photo/tavsan4.png
+    - assets/photo/tavsan5.png
+    - assets/photo/tavsan6.png
+    - assets/photo/urun1.png
+    - assets/photo/urun2.png
+    - assets/photo/urun3.png
+    - assets/photo/urun4.png
+    - assets/photo/urun5.png
+    - assets/photo/urun6.png
+
+
+
+
+
 
 

@@ -12,21 +12,21 @@ class CampaignScreen extends StatelessWidget {
           'Kampanyalar Sayfası',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        automaticallyImplyLeading: false, // Geri butonunu kaldırır
+        automaticallyImplyLeading: false,
       ),
-      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
+      backgroundColor: Color(0xFFD3D3D3), 
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 4), // AppBar ile arasına boşluk
+            SizedBox(height: 4),
             _buildCampaignContainer(
               context,
               imageAsset: 'assets/photo/dog_2.jpeg',
               text: 'İlk Siparişinize Özel 50TL Hediye',
             ),
-            SizedBox(height: 8), // Aralarındaki boşluk
+            SizedBox(height: 8), 
             _buildCampaignContainer(
               context,
               imageAsset: 'assets/photo/funny_cat.png',
@@ -40,8 +40,8 @@ class CampaignScreen extends StatelessWidget {
 
   Widget _buildCampaignContainer(BuildContext context, {required String imageAsset, required String text}) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9, // %90 genişlik
-      height: MediaQuery.of(context).size.height * 0.36, // %35 yükseklik
+      width: MediaQuery.of(context).size.width * 0.9, 
+      height: MediaQuery.of(context).size.height * 0.36, 
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
@@ -52,8 +52,8 @@ class CampaignScreen extends StatelessWidget {
           Image.asset(
             imageAsset,
             fit: BoxFit.cover, // İmage'ın containerı dolduracak şekilde sığması
-            height: MediaQuery.of(context).size.height * 0.24, // %25 yükseklik
-            width: MediaQuery.of(context).size.width * 0.8, // %90 genişlik
+            height: MediaQuery.of(context).size.height * 0.24,
+            width: MediaQuery.of(context).size.width * 0.8, 
           ),
           SizedBox(height: 4),
           Text(

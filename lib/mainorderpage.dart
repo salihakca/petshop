@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 final Map<String, List<Map<String, dynamic>>> categoryItems = {
   'Kedi Maması': [
@@ -31,27 +33,27 @@ final Map<String, List<Map<String, dynamic>>> categoryItems = {
   'Köpek Maması': [
     {
       'name': 'Kurutulmuş Köpek Maması',
-      'image': 'assets/photo/cat.jpeg',
+      'image': 'assets/photo/dog.jpeg',
       'price': '899 TL',
     },
     {
       'name': 'Islak Köpek Maması',
-      'image': 'assets/photo/cat.jpeg',
+      'image': 'assets/photo/dog.jpeg',
       'price': '1099 TL',
     },
     {
       'name': 'Kuzu Etli Köpek Maması',
-      'image': 'assets/photo/cat.jpeg',
+      'image': 'assets/photo/dog.jpeg',
       'price': '999 TL',
     },
     {
       'name': 'Balıklı Köpek Maması',
-      'image': 'assets/photo/cat.jpeg',
+      'image': 'assets/photo/dog.jpeg',
       'price': '999 TL',
     },
     {
       'name': 'Tavuklu Köpek Maması',
-      'image': 'assets/photo/cat.jpeg',
+      'image': 'assets/photo/dog.jpeg',
       'price': '999 TL',
     },
   ],
@@ -67,42 +69,26 @@ class MainOrderPage extends StatelessWidget {
     final List<Map<String, dynamic>> itemList = categoryItems[categoryName] ?? [];
 
     return Scaffold(
-      backgroundColor: Color(0xFFD3D3D3), // Dış rengi #D3D3D3 yaptık
+      backgroundColor: Color(0xFFD3D3D3),
       appBar: AppBar(
-        title: Text('$categoryName', style: TextStyle(color: Colors.white)), // CategoryName rengini white yaptık
-        backgroundColor: Color(0xFFE62063), // AppBar rengini #E62063 yaptık
-        iconTheme: IconThemeData(color: Colors.black), // AppBar'daki ikon rengini siyah yaptık
-        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold), // AppBar'daki başlık rengini white yaptık
+        title: Text('$categoryName', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFFE62063),
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
       ),
       body: GridView.builder(
         padding: EdgeInsets.all(8.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Yatayda 2 item
+          crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
-          childAspectRatio: 0.75, // Item boyutu oranı
+          childAspectRatio: 0.75,
         ),
         itemCount: itemList.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Satın Alındı"),
-                    content: Text("${itemList[index]['name']} satın alındı."),
-                    actions: [
-                      TextButton(
-                        child: Text("Tamam"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              _showPurchaseAlert(context, itemList[index]);
             },
             child: buildGridItem(itemList[index]),
           );
@@ -114,7 +100,7 @@ class MainOrderPage extends StatelessWidget {
   Widget buildGridItem(Map<String, dynamic> item) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // Item'ların arka plan rengini beyaz yaptık
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
@@ -146,11 +132,45 @@ class MainOrderPage extends StatelessWidget {
             'Fiyat: ${item['price']}',
             style: TextStyle(
               fontSize: 14,
-              color: Color(0xFFE62063), // Fiyat rengini #E62063 yaptık
+              color: Color(0xFFE62063),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showPurchaseAlert(BuildContext context, Map<String, dynamic> item) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? cartItems = prefs.getStringList('cartItems');
+    
+    if (cartItems == null) {
+      cartItems = [];
+    }
+
+    cartItems.add(jsonEncode(item));
+    await prefs.setStringList('cartItems', cartItems);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          title: Text("Hayırlı Olsun!"),
+          content: Text("Ürün başarıyla sepetinize eklendi."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Tamam 👍",
+                style: TextStyle(color: Color(0xFFE62063)),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

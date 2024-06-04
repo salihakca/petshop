@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petshop/mainscreen.dart'; 
 import 'package:petshop/register.dart'; 
-import 'package:petshop/Models/user.dart'; // user_model.dart dosyasını import edin
+import 'package:shared_preferences/shared_preferences.dart'; 
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,20 +17,29 @@ class _LoginPageState extends State<LoginPage> {
   bool isEmailValid = false;
   bool isPasswordValid = false;
 
-  void _validateInputs() {
+  void _validateInputs() async {
     setState(() {
       isEmailValid = emailController.text.contains('@');
       isPasswordValid = passwordController.text.length >= 8;
     });
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedEmail = prefs.getString('email');
+    String? storedPassword = prefs.getString('password');
+
     if (isEmailValid && isPasswordValid) {
-      // Koşullar sağlandığında giriş yapılır ve 'MainScreen' sayfasına yönlendirilir.
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
-      );
+      if (emailController.text == storedEmail &&
+          passwordController.text == storedPassword) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Kullanıcı adı ve şifreyi kontrol edin.')),
+        );
+      }
     } else {
-      // Koşullar sağlanmadığında kullanıcıya uyarı gösterilir.
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('E-posta ve şifre koşullarını kontrol edin.')),
       );
@@ -40,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
+      backgroundColor: Color(0xFFD3D3D3), 
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(

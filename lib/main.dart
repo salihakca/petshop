@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop/login.dart';
-import 'package:petshop/mainscreen.dart'; // mainscreen.dart dosyasını import etmeyi unutma!
+import 'package:petshop/register.dart'; // Import the RegisterPage
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
+      backgroundColor: const Color(0xFFD3D3D3),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
@@ -49,9 +49,9 @@ class MyHomePage extends StatelessWidget {
               Container(
                 width: 200,
                 height: 300,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color.fromARGB(255, 197, 93, 93),
+                  color: Color.fromARGB(255, 197, 93, 93),
                 ),
                 child: Image.asset(
                   'assets/photo/dog.png',
@@ -72,12 +72,12 @@ class MyHomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Color(0xFFE62063),
+                    const Color(0xFFE62063),
                   ),
                   minimumSize: MaterialStateProperty.all<Size>(
                     const Size(100, 60),
@@ -98,12 +98,12 @@ class MyHomePage extends StatelessWidget {
             left: 16,
             right: 16,
             child: SizedBox(
-              width: 150, // Alışverişe Başla butonunun genişliğini artırdık
+              width: 150, // Increase the width of the button
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MainScreen()),
+                    MaterialPageRoute(builder: (context) => const RegisterPage()),
                   );
                 },
                 style: ButtonStyle(
@@ -111,11 +111,11 @@ class MyHomePage extends StatelessWidget {
                     Colors.white,
                   ),
                   minimumSize: MaterialStateProperty.all<Size>(
-                    const Size(150, 60), // Boyutu da artırdık
+                    const Size(150, 60), // Increase the size of the button
                   ),
                 ),
                 child: const Text(
-                  'Alışverişe Başla',
+                  'Kayıt Ol',
                   style: TextStyle(
                     color: Color(0xFFE62063),
                     fontSize: 18,

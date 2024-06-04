@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petshop/searchscreen.dart';
 import 'package:petshop/profilescreen.dart';
 import 'package:petshop/campaingscreen.dart';
-import 'package:petshop/mainorderpage.dart'; // MainOrderPage'ı import etmeyi unutma
+import 'package:petshop/mainorderpage.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -42,17 +42,19 @@ class _MainScreenState extends State<MainScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Ana Ekran
           Scaffold(
             appBar: AppBar(
               backgroundColor: Color(0xFFE62063),
               title: Text(
-                'PetShop',
-                style: TextStyle(color: Colors.white),
+                'petShop',
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              automaticallyImplyLeading: false, // Geri butonunu kaldırır
+              automaticallyImplyLeading: false,
             ),
-            backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
+            backgroundColor: Color(0xFFD3D3D3),
             body: ListView.builder(
               itemCount: (categories.length / 2).ceil(),
               itemBuilder: (BuildContext context, int index) {
@@ -69,14 +71,8 @@ class _MainScreenState extends State<MainScreen>
               scrollDirection: Axis.vertical,
             ),
           ),
-
-          // Search Ekranı
           SearchScreen(),
-
-          // Profile Ekranı
           ProfileScreen(),
-
-          // Campaign Ekranı
           CampaignScreen(),
         ],
       ),
@@ -84,13 +80,13 @@ class _MainScreenState extends State<MainScreen>
         color: Colors.white,
         child: TabBar(
           controller: _tabController,
-          indicatorColor: Color(0xFFE62063), // Tab indicator rengini ayarladık
-          labelColor: Color(0xFFE62063), // Seçili tab ikon ve metin rengini ayarladık
-          unselectedLabelColor: Colors.grey, // Seçilmemiş tab ikon ve metin rengini ayarladık
+          indicatorColor: Color(0xFFE62063),
+          labelColor: Color(0xFFE62063),
+          unselectedLabelColor: Colors.grey,
           tabs: const [
             Tab(icon: Icon(Icons.home), text: 'Home'),
             Tab(icon: Icon(Icons.search), text: 'Search'),
-            Tab(icon: Icon(Icons.person), text: 'Profile'),
+            Tab(icon: Icon(Icons.shopping_cart), text: 'Basket'),
             Tab(icon: Icon(Icons.local_offer), text: 'Campaign'),
           ],
         ),
@@ -101,7 +97,6 @@ class _MainScreenState extends State<MainScreen>
   Widget buildCategoryItem(Map<String, dynamic> category) {
     return GestureDetector(
       onTap: () {
-        // Kategoriye tıklandığında yapılacak işlemler
         Navigator.push(
           context,
           MaterialPageRoute(

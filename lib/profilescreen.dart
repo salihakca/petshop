@@ -1,9 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/login.dart';
-import 'package:petshop/register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  List<Map<String, dynamic>> cartItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCartItems();
+  }
+
+  void _loadCartItems() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? cartItemsString = prefs.getStringList('cartItems');
+
+    if (cartItemsString != null) {
+      setState(() {
+        cartItems = cartItemsString
+            .map((item) => jsonDecode(item) as Map<String, dynamic>)
+            .toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,75 +37,72 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFFE62063),
         title: Text(
-          'Profil Sayfası',
+          'Sepet Sayfası',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        automaticallyImplyLeading: false, // Geri butonunu kaldırır
+        automaticallyImplyLeading: false,
       ),
-      backgroundColor: Color(0xFFD3D3D3), // Arka plan rengini ayarladık
-      body: Center(
-        // Yatayda ve dikeyde ortalamak için Center widget'ını kullanabilirsiniz
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top + 5,
-            ), // Status bar + 5 birimlik boşluk
-            Text(
-              'Merhaba!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 3), // 3 birimlik boşluk
-            Text(
-              'Sipariş verebilmek ve avantajlardan yararlanmak için',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 20), // 20 birimlik boşluk
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegisterPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFE62063), // Buton arka plan rengi
-                minimumSize: Size(400, 60), // Buton boyutu
-              ),
-              child: Text(
-                'Kayıt Ol',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(height: 20), // 20 birimlik boşluk
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // Buton arka plan rengi
-                side: BorderSide(color: Color(0xFFE62063)), // Kenarlık rengi
-                minimumSize: Size(400, 60), // Buton boyutu
-              ),
-              child: Text(
-                'Giriş Yap',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFE62063),
-                ),
-              ),
-            ),
-          ],
+      backgroundColor: Color(0xFFD3D3D3),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          padding: EdgeInsets.all(8.0),
+          itemCount: cartItems.length,
+          itemBuilder: (BuildContext context, int index) {
+            return buildListItem(cartItems[index]);
+          },
         ),
+      ),
+    );
+  }
+
+  Widget buildListItem(Map<String, dynamic> item) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      height: MediaQuery.of(context).size.height * 0.3,
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            item['image'],
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.15,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            item['name'],
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            'Fiyat: ${item['price']}',
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFFE62063),
+            ),
+          ),
+        ],
       ),
     );
   }

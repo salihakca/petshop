@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/mainscreen.dart'; // mainscreen.dart dosyasını import etmeyi unutma!
-import 'package:petshop/Models/register.dart'; // User modelini import edin
+import 'package:petshop/login.dart'; // Updated import for LoginPage
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isNumberValid = false;
   bool isAgreementChecked = false;
 
-  void _validateInputs() {
+  void _validateInputs() async {
     setState(() {
       isNameValid = nameController.text.isNotEmpty;
       isSurnameValid = surnameController.text.isNotEmpty;
@@ -38,22 +38,15 @@ class _RegisterPageState extends State<RegisterPage> {
         isPasswordValid &&
         isNumberValid &&
         isAgreementChecked) {
-      // Koşullar sağlandığında kayıt olunur ve 'MainScreen' sayfasına yönlendirilir.
-      final user = User(
-        name: nameController.text,
-        surname: surnameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-        number: numberController.text,
-      );
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('email', emailController.text);
+      await prefs.setString('password', passwordController.text);
 
-      // Burada kayıt işlemleri gerçekleştirilebilir, şu an sadece MainScreen'e yönlendiriyoruz.
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
+        MaterialPageRoute(builder: (context) => const LoginPage()), // Changed to LoginPage
       );
     } else {
-      // Koşullar sağlanmadığında kullanıcıya uyarı gösterilir.
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text(
@@ -85,21 +78,21 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 20),
             TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Ad',
               ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: surnameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Soyad',
               ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'E-posta',
               ),
             ),
@@ -107,14 +100,14 @@ class _RegisterPageState extends State<RegisterPage> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Şifre (En az 8 karakter)',
               ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: numberController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Numara',
               ),
             ),
@@ -140,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: _validateInputs,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  Color(0xFFE62063),
+                  const Color(0xFFE62063),
                 ),
                 minimumSize: MaterialStateProperty.all<Size>(
                   const Size(400, 60),

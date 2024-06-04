@@ -51,7 +51,7 @@ class CampaignScreen extends StatelessWidget {
         children: [
           Image.asset(
             imageAsset,
-            fit: BoxFit.cover, // İmage'ın containerı dolduracak şekilde sığması
+            fit: BoxFit.cover,
             height: MediaQuery.of(context).size.height * 0.24,
             width: MediaQuery.of(context).size.width * 0.8, 
           ),

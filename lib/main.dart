@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop/login.dart';
-import 'package:petshop/register.dart'; // Import the RegisterPage
+import 'package:petshop/register.dart'; // RegisterPage import edildi.
 
 void main() {
   runApp(const MyApp());
@@ -75,13 +75,9 @@ class MyHomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color(0xFFE62063),
-                  ),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                    const Size(100, 60),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFE62063), // Arka plan rengi
+                  minimumSize: const Size(100, 60), // Minimum boyut
                 ),
                 child: const Text(
                   'Giriş yap',
@@ -98,7 +94,7 @@ class MyHomePage extends StatelessWidget {
             left: 16,
             right: 16,
             child: SizedBox(
-              width: 150, // Increase the width of the button
+              width: 150, // Butonun genişliğini artırdık
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -106,13 +102,9 @@ class MyHomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const RegisterPage()),
                   );
                 },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
-                  ),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                    const Size(150, 60), // Increase the size of the button
-                  ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, // Arka plan rengi
+                  minimumSize: const Size(150, 60), // Minimum boyut
                 ),
                 child: const Text(
                   'Kayıt Ol',

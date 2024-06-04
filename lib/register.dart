@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/login.dart'; // Updated import for LoginPage
+import 'package:petshop/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const LoginPage()), // Changed to LoginPage
+          MaterialPageRoute(builder: (context) => const LoginPage()), 
         );
       });
     } else {
@@ -136,13 +136,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   ElevatedButton(
                     onPressed: _validateInputs,
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFFE62063),
-                      ),
-                      minimumSize: MaterialStateProperty.all<Size>(
-                        const Size(300, 60),
-                      ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE62063), 
+                      minimumSize: const Size(300, 60), 
                     ),
                     child: const Text(
                       'Kayıt Ol',

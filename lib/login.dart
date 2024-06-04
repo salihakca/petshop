@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/mainscreen.dart'; 
-import 'package:petshop/register.dart'; 
-import 'package:shared_preferences/shared_preferences.dart'; 
+import 'package:petshop/mainscreen.dart';
+import 'package:petshop/register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFD3D3D3), 
+      backgroundColor: const Color(0xFFD3D3D3),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'E-posta:',
               style: TextStyle(
                 fontSize: 14,
@@ -76,12 +76,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'example@example.com',
               ),
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Şifre:',
               style: TextStyle(
                 fontSize: 14,
@@ -91,23 +91,19 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'En az 8 karakter',
               ),
             ),
             const SizedBox(height: 100),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, 
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _validateInputs,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xFFE62063),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(300, 60),
-                    ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFE62063), 
+                    minimumSize: const Size(300, 60), 
                   ),
                   child: const Text(
                     'Giriş yap',
@@ -118,25 +114,18 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, 
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                      MaterialPageRoute(builder: (context) => const RegisterPage()),
                     );
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                    side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(color: Color(0xFFE62063)),
-                    ),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(300, 60),
-                    ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFFE62063), minimumSize: const Size(300, 60), 
+                    side: const BorderSide(color: Color(0xFFE62063)),
                   ),
                   child: const Text(
                     'Üye Ol',

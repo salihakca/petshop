@@ -21,6 +21,7 @@ class _MainScreenState extends State<MainScreen>
     {'image': 'assets/photo/fish.jpeg', 'name': 'Balık Yemi'},
     {'image': 'assets/photo/papagan1.png', 'name': 'Papagan Yemi'},
     {'image': 'assets/photo/tavsan.jpeg', 'name': 'Tavşan Yemi'},
+    {'image': 'assets/photo/urun1.png', 'name': 'Aksesuar'},
   ];
 
   @override

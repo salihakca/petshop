@@ -23,7 +23,10 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isNumberValid = false;
   bool isAgreementChecked = false;
 
-  void _validateInputs() {
+ void _validateInputs() {
+  print('Kayıt ol butonuna tıklandı');
+
+  try {
     setState(() {
       isNameValid = nameController.text.isNotEmpty;
       isSurnameValid = surnameController.text.isNotEmpty;
@@ -31,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
       isPasswordValid = passwordController.text.length >= 8;
       isNumberValid = numberController.text.isNotEmpty;
     });
+    print('validler kontrol edildi');
 
     if (isNameValid &&
         isSurnameValid &&
@@ -41,20 +45,28 @@ class _RegisterPageState extends State<RegisterPage> {
       SharedPreferences.getInstance().then((prefs) {
         prefs.setString('email', emailController.text);
         prefs.setString('password', passwordController.text);
+        print('shared preferences kayıt oldu');
 
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const LoginPage()), 
         );
+        print('navigate yapıldı sıkıntısız şekilde ');
+      }).catchError((error) {
+        print('SharedPreferences hatası: cathe düştü $error');
       });
     } else {
+      print('navigate ya da shared de bi sıkıntı oldu neden? else düştü');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Lütfen tüm alanları doğru şekilde doldurun ve gizlilik politikasını kabul edin.'),
         ),
       );
     }
+  } catch (error) {
+    print('Bir hata oluştu: $error');
   }
+}
 
   @override
   Widget build(BuildContext context) {

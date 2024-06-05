@@ -107,7 +107,7 @@ class MyHomePage extends StatelessWidget {
                   minimumSize: const Size(150, 60), // Minimum boyut
                 ),
                 child: const Text(
-                  'Kayıt Ol',
+                  'Üye Ol',
                   style: TextStyle(
                     color: Color(0xFFE62063),
                     fontSize: 18,

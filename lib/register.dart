@@ -153,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       minimumSize: const Size(300, 60), 
                     ),
                     child: const Text(
-                      'Kayıt Ol',
+                      'Üye Ol',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

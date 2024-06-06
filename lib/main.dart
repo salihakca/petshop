@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop/login.dart';
-import 'package:petshop/register.dart'; // RegisterPage import edildi.
+import 'package:petshop/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,8 +76,8 @@ class MyHomePage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE62063), // Arka plan rengi
-                  minimumSize: const Size(100, 60), // Minimum boyut
+                  backgroundColor: const Color(0xFFE62063),
+                  minimumSize: const Size(100, 60), 
                 ),
                 child: const Text(
                   'Giriş yap',
@@ -94,7 +94,7 @@ class MyHomePage extends StatelessWidget {
             left: 16,
             right: 16,
             child: SizedBox(
-              width: 150, // Butonun genişliğini artırdık
+              width: 150, 
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -103,8 +103,8 @@ class MyHomePage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Arka plan rengi
-                  minimumSize: const Size(150, 60), // Minimum boyut
+                  backgroundColor: Colors.white, 
+                  minimumSize: const Size(150, 60), 
                 ),
                 child: const Text(
                   'Üye Ol',
